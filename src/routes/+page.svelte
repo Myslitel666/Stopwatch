@@ -89,9 +89,10 @@ isReset = false;
     {:else}
       <ButtonBox
         onClick={() => {
-          clearTimer();
+
+  startTime = getStartTime();
+clearTimer();
           isStopped = true;
-          startTime = getStartTime();
         }}
         borderRadius="50%"
       >
