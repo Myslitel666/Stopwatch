@@ -8,6 +8,7 @@
   let isStopped = true;
   let startTime = -1;
   let debug = false;
+  let isReset = true;
   const timeStart = "00";
   let minutes = timeStart;
   let seconds = timeStart;
@@ -15,8 +16,8 @@
   let timerInterval: number | null = null;
 
   function getStartTime() {
-    const isReset = minutes === timeStart && seconds === timeStart && ms === timeStart;
-    if (isReset === true) {
+    const isResetL = minutes === timeStart && seconds === timeStart && ms === timeStart;
+    if (isResetL === true) {
 debug = true;
 return Date.now();
 }
@@ -67,9 +68,12 @@ return Date.now();
     {#if isStopped}
       <ButtonBox
         onClick={() => {
+if (isReset) {
           startTime = getStartTime();
+}
           initialTimer();
           isStopped = false;
+isReset = false;
         }}
         borderRadius="50%"
       >
@@ -87,6 +91,7 @@ return Date.now();
         onClick={() => {
           clearTimer();
           isStopped = true;
+          startTime = getStartTime();
         }}
         borderRadius="50%"
       >
@@ -107,6 +112,7 @@ return Date.now();
           seconds = timeStart;
           ms = timeStart;
           isStopped = true;
+          isReset = true;
         }}
         borderRadius="50%"
       >
