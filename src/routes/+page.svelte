@@ -54,6 +54,7 @@
 </script>
 
 <div class="page">
+{startTime}
   <div class="timer" style:color={$themeStore.palette.primary}>
     {minutes}:{seconds}<span class="ms">{ms}</span>
   </div>
