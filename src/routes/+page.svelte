@@ -18,7 +18,7 @@
     const isReset = minutes === timeStart && seconds === timeStart && ms === timeStart;
     if (isReset === true) {
 debug = true;
-return Date.Now();
+return Date.now();
 }
     return startTime;
   }
