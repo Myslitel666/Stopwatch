@@ -5,6 +5,7 @@
   import { Play, Pause } from "svelte-elegant/icons-elegant";
 
   let isInitialized = false;
+  let isStopped = true;
   const timeStart = "00";
   let minutes = timeStart;
   let seconds = timeStart;
@@ -50,45 +51,61 @@
   <div class="timer" style:color={$themeStore.palette.primary}>
     {minutes}:{seconds}<span class="ms">{ms}</span>
   </div>
-  {#if timerInterval === null && minutes === timeStart && seconds === timeStart && ms === timeStart}
-    <ButtonBox onClick={initialTimer} borderRadius="50%">
-      <div
-        style:display="flex"
-        style:justify-content="center"
-        style:width="100%"
-        style:margin-left="5px"
+  <div class="buttons">
+    {#if isStopped}
+      <ButtonBox
+        onClick={() => {
+          initialTimer();
+          isStopped = false;
+        }}
+        borderRadius="50%"
       >
-        <Play size="45px" />
-      </div>
-    </ButtonBox>
-  {:else}
-    <div class="buttons">
-      <ButtonBox onClick={clearTimer} borderRadius="50%">
+        <div
+          style:display="flex"
+          style:justify-content="center"
+          style:width="100%"
+          style:margin-left="5px"
+        >
+          <Play size="43px" />
+        </div>
+      </ButtonBox>
+    {:else}
+      <ButtonBox
+        onClick={() => {
+          clearTimer();
+          isStopped = true;
+        }}
+        borderRadius="50%"
+      >
         <div
           style:display="flex"
           style:justify-content="center"
           style:width="100%"
         >
-          <Pause size="60px" />
+          <Pause size="65px" />
         </div>
       </ButtonBox>
+    {/if}
+    {#if ms !== timeStart || seconds !== timeStart || minutes !== timeStart}
       <ButtonBox
         onClick={() => {
+          clearTimer();
           minutes = timeStart;
           seconds = timeStart;
           ms = timeStart;
+          isStopped = true;
         }}
         borderRadius="50%"
       >
         <div
-          style:width="35px"
-          style:height="35px"
+          style:width="37px"
+          style:height="37px"
           style:border-radius="6px"
           style:background-color={$themeStore.palette.text.main}
         ></div>
       </ButtonBox>
-    </div>
-  {/if}
+    {/if}
+  </div>
 </div>
 
 <style>
