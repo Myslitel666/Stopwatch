@@ -7,6 +7,7 @@
   let isInitialized = false;
   let isStopped = true;
   let startTime = -1;
+  let debug = false;
   const timeStart = "00";
   let minutes = timeStart;
   let seconds = timeStart;
@@ -14,6 +15,7 @@
   let timerInterval: number | null = null;
 
   function getStartTime() {
+    debug = true;
     const isReset = minutes === timeStart && seconds === timeStart && ms === timeStart;
     if (isReset === true) return Date.Now();
     return startTime;
@@ -54,6 +56,7 @@
 </script>
 
 <div class="page">
+{debug}
 {startTime}
   <div class="timer" style:color={$themeStore.palette.primary}>
     {minutes}:{seconds}<span class="ms">{ms}</span>
