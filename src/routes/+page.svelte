@@ -2,6 +2,7 @@
   import { themeStore } from "svelte-elegant/stores";
   import { onMount, onDestroy } from "svelte";
   import { ButtonBox } from "svelte-elegant";
+  import { Play, Pause } from "svelte-elegant/icons-elegant";
 
   let isInitialized = false;
   const timeStart = "00";
@@ -50,10 +51,27 @@
     {minutes}:{seconds}<span class="ms">{ms}</span>
   </div>
   {#if timerInterval === null && minutes === timeStart && seconds === timeStart && ms === timeStart}
-    <ButtonBox onClick={initialTimer} borderRadius="50%">S</ButtonBox>
+    <ButtonBox onClick={initialTimer} borderRadius="50%">
+      <div
+        style:display="flex"
+        style:justify-content="center"
+        style:width="100%"
+        style:margin-left="5px"
+      >
+        <Play size="45px" />
+      </div>
+    </ButtonBox>
   {:else}
     <div class="buttons">
-      <ButtonBox onClick={clearTimer} borderRadius="50%">T</ButtonBox>
+      <ButtonBox onClick={clearTimer} borderRadius="50%">
+        <div
+          style:display="flex"
+          style:justify-content="center"
+          style:width="100%"
+        >
+          <Pause size="60px" />
+        </div>
+      </ButtonBox>
       <ButtonBox
         onClick={() => {
           minutes = timeStart;
