@@ -82,7 +82,6 @@
         onClick={() => {
           clearTimer();
           isStopped = true;
-          startTime = Date.Now();
         }}
         borderRadius="50%"
       >
