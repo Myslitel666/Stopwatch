@@ -6,18 +6,24 @@
 
   let isInitialized = false;
   let isStopped = true;
+  let startTime = -1;
   const timeStart = "00";
   let minutes = timeStart;
   let seconds = timeStart;
   let ms = timeStart;
   let timerInterval: number | null = null;
 
+  function getStartTime() {
+    const isReset = minutes === timeStart && seconds === timeStart && ms === timeStart;
+    if (isReset === true) return Date.Now();
+    return startTime;
+  }
+
   function formatTimeUnits(value: number) {
     return (value % 60).toString().padStart(2, "0");
   }
 
   function initialTimer() {
-    const startTime = Date.now();
 
     timerInterval = setInterval(() => {
       const elapsed = Date.now() - startTime;
@@ -57,6 +63,7 @@
         onClick={() => {
           initialTimer();
           isStopped = false;
+          startTime = getStartTime();
         }}
         borderRadius="50%"
       >
@@ -74,6 +81,7 @@
         onClick={() => {
           clearTimer();
           isStopped = true;
+          startTime = Date.Now();
         }}
         borderRadius="50%"
       >
