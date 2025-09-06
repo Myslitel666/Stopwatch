@@ -49,10 +49,29 @@
   <div class="timer" style:color={$themeStore.palette.primary}>
     {minutes}:{seconds}<span class="ms">{ms}</span>
   </div>
-  <ButtonBox onClick={initialTimer} borderRadius="50%">S</ButtonBox>
+  {#if timerInterval === null && minutes === timeStart && seconds === timeStart && ms === timeStart}
+    <ButtonBox onClick={initialTimer} borderRadius="50%">S</ButtonBox>
+  {:else}
+    <div class="buttons">
+      <ButtonBox onClick={clearTimer} borderRadius="50%">T</ButtonBox>
+      <ButtonBox
+        onClick={() => {
+          minutes = timeStart;
+          seconds = timeStart;
+          ms = timeStart;
+        }}
+        borderRadius="50%">Y</ButtonBox
+      >
+    </div>
+  {/if}
 </div>
 
 <style>
+  .buttons {
+    display: flex;
+    gap: 10px;
+  }
+
   .page {
     width: 100vw;
     display: flex;
