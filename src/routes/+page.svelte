@@ -62,9 +62,9 @@
     {#if isStopped}
       <ButtonBox
         onClick={() => {
+          startTime = getStartTime();
           initialTimer();
           isStopped = false;
-          startTime = getStartTime();
         }}
         borderRadius="50%"
       >
