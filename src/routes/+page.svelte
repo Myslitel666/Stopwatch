@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { themeStore, themeMode } from "svelte-elegant/stores";
+  import { themeStore } from "svelte-elegant/stores";
   import { onMount, onDestroy } from "svelte";
+  import { ButtonBox } from "svelte-elegant";
 
   let isInitialized = false;
   const timeStart = "00";
@@ -8,12 +9,6 @@
   let seconds = timeStart;
   let ms = timeStart;
   let timerInterval: number | null = null;
-  let theme;
-
-  // Подписываемся на изменения темы
-  themeStore.subscribe((value) => {
-    theme = value; //Инициализация объекта темы
-  });
 
   function formatTimeUnits(value: number) {
     return (value % 60).toString().padStart(2, "0");
@@ -38,7 +33,6 @@
   }
 
   onMount(() => {
-    initialTimer();
     isInitialized = true;
   });
 
@@ -55,6 +49,7 @@
   <div class="timer" style:color={$themeStore.palette.primary}>
     {minutes}:{seconds}<span class="ms">{ms}</span>
   </div>
+  <ButtonBox onClick={initialTimer} borderRadius="50%">S</ButtonBox>
 </div>
 
 <style>
@@ -62,10 +57,14 @@
     width: 100vw;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 
   .timer {
     font-size: 48px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
 
   .ms {

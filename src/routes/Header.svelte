@@ -29,10 +29,14 @@
         style:filter={logotypeFilter}
         style:transition="all 0.3s"
       >
-        Math
+        Stop
       </span>
-      <span style:color={elegantColor} style:transition="all 0.3s">
-        Trainer
+      <span
+        style:color={elegantColor}
+        style:transition="all 0.3s"
+        style:margin-left="-5px"
+      >
+        watch
       </span>
     </p>
   </button>
