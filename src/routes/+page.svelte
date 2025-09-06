@@ -7,7 +7,7 @@
   let isInitialized = false;
   let isStopped = true;
   let startTime = -1;
-  let debug = false;
+  let debug = 0;
   let isReset = true;
   const timeStart = "00";
   let minutes = timeStart;
@@ -18,7 +18,6 @@
   function getStartTime() {
     const isResetL = minutes === timeStart && seconds === timeStart && ms === timeStart;
     if (isResetL === true) {
-debug = true;
 return Date.now();
 }
     return startTime;
@@ -70,6 +69,7 @@ return Date.now();
         onClick={() => {
 if (isReset) {
           startTime = getStartTime();
+debug++;
 }
           initialTimer();
           isStopped = false;
