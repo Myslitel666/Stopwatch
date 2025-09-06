@@ -2,27 +2,17 @@
   import { themeStore, themeMode } from "svelte-elegant/stores";
   import { onMount, onDestroy } from "svelte";
 
-  let exampleColor = "";
   let isInitialized = false;
   const timeStart = "00";
   let minutes = timeStart;
   let seconds = timeStart;
   let ms = timeStart;
   let timerInterval: number | null = null;
-
-  let rightColor = "";
-
-  let theme: any;
+  let theme;
 
   // Подписываемся на изменения темы
   themeStore.subscribe((value) => {
     theme = value; //Инициализация объекта темы
-
-    if ($themeMode === "light") {
-      rightColor = theme.palette.primary;
-    } else {
-      rightColor = "#24F048";
-    }
   });
 
   function formatTimeUnits(value: number) {
@@ -61,11 +51,19 @@
   });
 </script>
 
-<div class="timer">
-  {minutes}:{seconds}<span class="ms">{ms}</span>
+<div class="page">
+  <div class="timer" style:color={$themeStore.palette.primary}>
+    {minutes}:{seconds}<span class="ms">{ms}</span>
+  </div>
 </div>
 
 <style>
+  .page {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+  }
+
   .timer {
     font-size: 48px;
   }
