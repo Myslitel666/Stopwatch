@@ -78,8 +78,15 @@
           seconds = timeStart;
           ms = timeStart;
         }}
-        borderRadius="50%">Y</ButtonBox
+        borderRadius="50%"
       >
+        <div
+          style:width="35px"
+          style:height="35px"
+          style:border-radius="6px"
+          style:background-color={$themeStore.palette.text.main}
+        ></div>
+      </ButtonBox>
     </div>
   {/if}
 </div>
