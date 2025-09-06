@@ -15,9 +15,11 @@
   let timerInterval: number | null = null;
 
   function getStartTime() {
-    debug = true;
     const isReset = minutes === timeStart && seconds === timeStart && ms === timeStart;
-    if (isReset === true) return Date.Now();
+    if (isReset === true) {
+debug = true;
+return Date.Now();
+}
     return startTime;
   }
 
