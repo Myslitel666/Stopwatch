@@ -2,6 +2,7 @@
   import ColorThemeSwitch from "svelte-elegant/ColorThemeSwitch";
   import { goto } from "$app/navigation";
   import Header from "svelte-elegant/Header";
+  import { Stopwatch } from "svelte-elegant/icons-elegant";
 
   import { themeMode, themeStore } from "svelte-elegant/stores";
 
@@ -22,8 +23,13 @@
 </script>
 
 <Header>
-  <button style:gap="0.5rem" onclick={() => goto("/settings")}>
-    <p style:font-size="26px">
+  <button
+    style:margin-left="-2px"
+    style:gap="1px"
+    onclick={() => goto("/settings")}
+  >
+    <Stopwatch size="38px" />
+    <p style:font-size="26px" style:margin-top="4px">
       <span
         style:color={svelteColor}
         style:filter={logotypeFilter}
