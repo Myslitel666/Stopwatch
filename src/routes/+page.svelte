@@ -6,31 +6,23 @@
 
   let isInitialized = false;
   let isStopped = true;
-  let startTime = -1;
-  let debug = 0;
+  let elapsedTime = 0;
   let isReset = true;
-  const timeStart = "00";
-  let minutes = timeStart;
-  let seconds = timeStart;
-  let ms = timeStart;
+  const timeStartConst = "00";
+  let minutes = timeStartConst;
+  let seconds = timeStartConst;
+  let ms = timeStartConst;
   let timerInterval: number | null = null;
-
-  function getStartTime() {
-    const isResetL = minutes === timeStart && seconds === timeStart && ms === timeStart;
-    if (isResetL === true) {
-return Date.now();
-}
-    return startTime;
-  }
 
   function formatTimeUnits(value: number) {
     return (value % 60).toString().padStart(2, "0");
   }
 
   function initialTimer() {
+    const elapsedTime = Date.now();
 
     timerInterval = setInterval(() => {
-      const elapsed = Date.now() - startTime;
+      const elapsed = Date.now() - elapsedTime;
 
       seconds = formatTimeUnits(Math.floor(elapsed / 1000));
       ms = formatTimeUnits(Math.floor(elapsed / 16.666));
@@ -58,8 +50,6 @@ return Date.now();
 </script>
 
 <div class="page">
-{debug}
-{startTime}
   <div class="timer" style:color={$themeStore.palette.primary}>
     {minutes}:{seconds}<span class="ms">{ms}</span>
   </div>
@@ -67,13 +57,9 @@ return Date.now();
     {#if isStopped}
       <ButtonBox
         onClick={() => {
-if (isReset) {
-          startTime = getStartTime();
-debug++;
-}
           initialTimer();
           isStopped = false;
-isReset = false;
+          isReset = false;
         }}
         borderRadius="50%"
       >
@@ -89,9 +75,7 @@ isReset = false;
     {:else}
       <ButtonBox
         onClick={() => {
-
-  startTime = getStartTime();
-clearTimer();
+          clearTimer();
           isStopped = true;
         }}
         borderRadius="50%"
@@ -105,13 +89,13 @@ clearTimer();
         </div>
       </ButtonBox>
     {/if}
-    {#if ms !== timeStart || seconds !== timeStart || minutes !== timeStart}
+    {#if ms !== timeStartConst || seconds !== timeStartConst || minutes !== timeStartConst}
       <ButtonBox
         onClick={() => {
           clearTimer();
-          minutes = timeStart;
-          seconds = timeStart;
-          ms = timeStart;
+          minutes = timeStartConst;
+          seconds = timeStartConst;
+          ms = timeStartConst;
           isStopped = true;
           isReset = true;
         }}
