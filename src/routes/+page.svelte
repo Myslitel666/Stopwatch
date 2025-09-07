@@ -6,8 +6,8 @@
 
   let isInitialized = false;
   let isStopped = true;
+  let rememberedTime = 0;
   let elapsedTime = 0;
-  let isReset = true;
   const timeStartConst = "00";
   let minutes = timeStartConst;
   let seconds = timeStartConst;
@@ -19,14 +19,14 @@
   }
 
   function initialTimer() {
-    const elapsedTime = Date.now();
+    const startTime = Date.now();
 
     timerInterval = setInterval(() => {
-      const elapsed = Date.now() - elapsedTime;
+      elapsedTime = rememberedTime + Date.now() - startTime;
 
-      seconds = formatTimeUnits(Math.floor(elapsed / 1000));
-      ms = formatTimeUnits(Math.floor(elapsed / 16.666));
-    }, 10); // Интервал не важен, можно 16ms (~60fps)
+      seconds = formatTimeUnits(Math.floor(elapsedTime / 1000));
+      ms = formatTimeUnits(Math.floor(elapsedTime / 16.666));
+    }, 60); // Интервал не важен, можно 16ms (~60fps)
   }
 
   function clearTimer() {
@@ -59,7 +59,6 @@
         onClick={() => {
           initialTimer();
           isStopped = false;
-          isReset = false;
         }}
         borderRadius="50%"
       >
@@ -77,6 +76,7 @@
         onClick={() => {
           clearTimer();
           isStopped = true;
+          rememberedTime = elapsedTime;
         }}
         borderRadius="50%"
       >
@@ -97,7 +97,8 @@
           seconds = timeStartConst;
           ms = timeStartConst;
           isStopped = true;
-          isReset = true;
+          elapsedTime = 0;
+          rememberedTime = 0;
         }}
         borderRadius="50%"
       >
