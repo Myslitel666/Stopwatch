@@ -24,6 +24,7 @@
     timerInterval = setInterval(() => {
       elapsedTime = rememberedTime + Date.now() - startTime;
 
+      minutes = formatTimeUnits(Math.floor(elapsedTime / 60000));
       seconds = formatTimeUnits(Math.floor(elapsedTime / 1000));
       ms = formatTimeUnits(Math.floor(elapsedTime / 16.666));
     }, 60); // Интервал не важен, можно 16ms (~60fps)
@@ -106,7 +107,7 @@
           style:width="37px"
           style:height="37px"
           style:border-radius="6px"
-          style:background-color={$themeStore.palette.text.main}
+          style:background-color="red"
         ></div>
       </ButtonBox>
     {/if}
